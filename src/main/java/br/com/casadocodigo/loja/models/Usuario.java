@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,9 @@ public class Usuario implements UserDetails {
 	private String email;
 	private String senha;
 	private String nome;
+	
+	@Transient 
+	private String senharep;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "Usuario_Role",
@@ -60,6 +64,14 @@ public class Usuario implements UserDetails {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+	
+	public String getSenharep() {
+		return senharep;
+	}
+	
+	public void setSenharep(String senharep) {
+		this.senharep = senharep;
 	}
 
 	@Override
