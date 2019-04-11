@@ -64,7 +64,7 @@ public class UsuarioController {
 
 		usuarioDao.gravar(usuario);		
 
-		redirectAttributes.addFlashAttribute("message", "Produto cadastrado com sucesso!");
+		redirectAttributes.addFlashAttribute("menssagem", "Produto cadastrado com sucesso!");
 
 		return listar();
 	}
@@ -91,7 +91,7 @@ public class UsuarioController {
 		
 		usuarioDao.gravar(usu);
 
-		redirectAttributes.addFlashAttribute("message", "Roles Alteradas com sucesso!");
+		redirectAttributes.addFlashAttribute("menssagem", "Roles Alteradas com sucesso!");
 
 		return listar();
 	}

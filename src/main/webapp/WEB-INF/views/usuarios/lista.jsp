@@ -15,7 +15,7 @@
 		</h2>
 
 		<h2>Lista de Usuários</h2>
-		<p>${message}</p>
+		<p>${menssagem}</p>
 
 		<table class="table table-bordered table-striped table-hover">
 			<tr>
