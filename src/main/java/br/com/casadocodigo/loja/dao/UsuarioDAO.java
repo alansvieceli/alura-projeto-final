@@ -39,7 +39,7 @@ public class UsuarioDAO implements UserDetailsService {
 		
 	}
 
-	public void gravar(Usuario usuario) {
+	public void gravar(Usuario usuario) {			
 		manager.persist(usuario);
 	}
 

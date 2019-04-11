@@ -21,11 +21,19 @@
 			<tr>
 				<th>Nome</th>
 				<th>E-mail</th>
+				<th>Roles</th>
+				<th></th>
 			</tr>
 			<c:forEach items="${usuarios}" var="usuario">
 				<tr>
 					<td>${usuario.nome }</td>
 					<td>${usuario.email }</td>
+					<td>${usuario.roles }</td>
+					<td>
+					<a href="${s:mvcUrl('UC#roles').arg(0, usuario.email).build() }">
+					<img alt="Alterar/Inserir Role" src="https://storage.googleapis.com/helpdocs-assets/pxEGJf5ac2/articles/YMDw6yh4Pi/1518808666761/add-team-member.png" /> 
+					</a>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

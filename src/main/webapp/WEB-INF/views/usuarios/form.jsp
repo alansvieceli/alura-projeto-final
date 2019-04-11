@@ -10,7 +10,7 @@
 	<div class="container">
 		<h1>Cadastro de Usuário</h1>
 		<form:form action="${s:mvcUrl('UC#gravar').build() }" method="post"
-			commandName="usuario" enctype="multipart/form-data">
+			commandName="usuario">
 			<div class="form-group">
 				<label>Nome</label>
 				<form:input path="nome" cssClass="form-control" />

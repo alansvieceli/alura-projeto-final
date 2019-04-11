@@ -1,6 +1,8 @@
 package br.com.casadocodigo.loja.controllers;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -15,7 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.casadocodigo.loja.dao.RoleDAO;
 import br.com.casadocodigo.loja.dao.UsuarioDAO;
+import br.com.casadocodigo.loja.models.Role;
 import br.com.casadocodigo.loja.models.Usuario;
 import br.com.casadocodigo.loja.validation.UsuarioValidation;
 
@@ -25,6 +29,9 @@ public class UsuarioController {
 
 	@Autowired
 	UsuarioDAO usuarioDao;
+	
+	@Autowired
+	RoleDAO roleDao;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -58,6 +65,33 @@ public class UsuarioController {
 		usuarioDao.gravar(usuario);		
 
 		redirectAttributes.addFlashAttribute("message", "Produto cadastrado com sucesso!");
+
+		return listar();
+	}
+	
+	@RequestMapping("/roles")
+	public ModelAndView roles(String email) {
+		ModelAndView modelAndView = new ModelAndView("usuarios/roles");
+		
+		Usuario usuario = usuarioDao.loadUserByUsername(email);
+		//List<String> roles = roleDao.list().stream().map(Role::getNome).collect(Collectors.toList());
+		List<Role> roles = roleDao.list();
+
+		modelAndView.addObject("usuario", usuario);
+		modelAndView.addObject("roles", roles);
+		return modelAndView;
+	}	
+	
+	@RequestMapping(value="/gravarRoles", method=RequestMethod.POST)
+	public ModelAndView gravarRoles(Usuario usuario,
+			RedirectAttributes redirectAttributes) {
+
+		Usuario usu = usuarioDao.loadUserByUsername(usuario.getEmail());
+		usu.setRoles(usuario.getRoles());
+		
+		usuarioDao.gravar(usu);
+
+		redirectAttributes.addFlashAttribute("message", "Roles Alteradas com sucesso!");
 
 		return listar();
 	}

@@ -3,6 +3,7 @@ package br.com.casadocodigo.loja.models;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -72,6 +73,10 @@ public class Usuario implements UserDetails {
 	
 	public void setSenharep(String senharep) {
 		this.senharep = senharep;
+	}
+	
+	public List<String> getRolesStr() {
+		 return roles.stream().map(Role::getNome).collect(Collectors.toList());		
 	}
 
 	@Override
